@@ -1,0 +1,78 @@
+html{
+	
+}
+
+.main{
+	position: absolute;
+	width: 1160px;
+	top: 120px;
+	left: 250px;
+}
+
+.header{
+	position: absolute;
+	width: 1280px;
+	background: #EBF1E8;
+	height: 120px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.left{
+	position: absolute;
+	top: 120px;
+	width: 250px;
+	background: #EBF1E8;
+	bottom: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+}
+
+.footer{
+	position: absolute;
+	height: 20px;
+	width: 1280px;
+	background: #EBF1E8;
+	bottom: 0px;
+	left: 0px;
+}
+
+/* Enfernt die Buttons beim Eingabefeld entfernen */ 
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+/**************************************************/
+
+table.aqresult
+{
+	border: 1px solid black;
+	padding: 5px;
+	margin: 20px
+}
+
+.aqresult td
+{
+	border: 1px dotted black;
+	width: 100px;
+	text-align: center;
+}	
+
+table.aqdetails
+{
+	border: 1px solid red;
+	padding: 5px;
+	margin: 20px;
+}
+
+.aqdetails td
+{
+	border: 1px dotted red;
+	width: 100px;
+}	
