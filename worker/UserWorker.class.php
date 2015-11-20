@@ -64,7 +64,7 @@ class UserWorker
 	static function getTeamForDate($start,$end)
 	{
 		$pdo = new DBConnector();
-		$select = "select "
+		$select = "select ";
 	}
 	
 	
