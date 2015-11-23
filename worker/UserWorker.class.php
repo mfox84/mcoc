@@ -7,12 +7,14 @@ class UserWorker
 	function showuser()
 	{
 		$pdo = new DBConnector();
-		$userarr = $pdo->runSelectPDO("select user_id, user_name, user_defaultteam from users order by user_name asc");
+		$userarr = $pdo->runSelectPDO("select user_id, user_name, user_defaultteam,user_entrydate,user_leftdate from users order by user_name asc");
 		
 		echo "<table class='user'>";
 		echo "<tr>";
 		echo "<th>Name</th>";
 		echo "<th>Team</th>";
+		echo "<th>Beigetreten am</th>";
+		echo "<th>Ausgetreten am</th>";
 		echo "</tr>";
 		
 		
@@ -20,7 +22,9 @@ class UserWorker
 		{
 			echo "<tr>";
 			echo "<td>".$user['user_name']."</td>";
-			echo "<td>".$user['user_defaultteam']."</td>";		
+			echo "<td>".$user['user_defaultteam']."</td>";
+			echo "<td>".date("d.m.Y",$user['user_entrydate'])."</td>";		
+			echo "<td>".($user['user_leftdate'] != 0 ? date("d.m.Y",$user['user_leftdate']):' --- ')."</td>";				
 			echo "</tr>";
 		}	
 		echo "</table>";	
