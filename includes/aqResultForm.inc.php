@@ -37,9 +37,9 @@ else
 	$pointsTotalAQ = AQWorker::getPointsTotal($aqid);
 	
 	// Schon vorhandene Punkte holen, um das Formular ggfs. zu füllen
-	$points = AQWorker::getAQResults($aqid);
-	if($points == null)
-		$points = array(); // damit später auf ein leeres Array geprüft werden kann
+	$results = AQWorker::getAQResults($aqid);
+	if($results == null)
+		$results = array(); // damit später auf ein leeres Array geprüft werden kann
 	
 	// AQ-Zeit auf Tage aufteilen
 	
@@ -59,6 +59,7 @@ else
 		unset($row);
 		$row['user'] = $user['user_name'];
 		$row['userid'] = $user['user_id'];
+		$row['userteam'] = $user['user_defaultteam'];
 		foreach($tag as $key => $t)
 		{
 			$key+=1;
@@ -66,14 +67,27 @@ else
 			$row[$tid] = (UserWorker::checkDate($user, $t) ? 1 : 0);	
 			
 			// Punkte schreiben, falls vorhanden
+			// Team schreiben, falls vorhanden
 			$pid = "points".$key;
-			if(array_key_exists($key, $points) && array_key_exists($user['user_id'], $points[$key]))
+			$teamid = "team".$key;
+			
+			if(array_key_exists($key, $results) && array_key_exists($user['user_id'], $results[$key]))
 			{
-				$row[$pid] = $points[$key][$user['user_id']];	
+				$temp = $results[$key][$user['user_id']];
+				if(array_key_exists("points", $temp))
+					$row[$pid] = $temp['points'];
+				else
+					$row[$pid] = 0;	
+				
+				if(array_key_exists("team", $temp))
+					$row[$teamid] = $temp['team'];
+				else
+					$row[$teamid] = $row['userteam'];
 			}
 			else
 			{
-				$row[$pid] = "";
+				$row[$pid] = 0;
+				$row[$teamid] = $row['userteam'];
 			}
 		}
 		
@@ -84,7 +98,7 @@ else
 }
 
 // Details zur AQ ausgeben
-include("includes/aqDetails.inc.php");
+include("includes/aqStatistic.inc.php");
 
 // Formular aufspannen
 if(isset($rows))
@@ -93,11 +107,19 @@ if(isset($rows))
 	echo "<table>";
 	echo "<tr>";
 	echo "<th>Username</th>";
-	echo "<th>Tag1</th>";
-	echo "<th>Tag2</th>";
-	echo "<th>Tag3</th>";
-	echo "<th>Tag4</th>";
-	echo "<th>Tag5</th>";
+	echo "<th colspan='2'>Tag1</th>";
+	echo "<th colspan='2'>Tag2</th>";
+	echo "<th colspan='2'>Tag3</th>";
+	echo "<th colspan='2'>Tag4</th>";
+	echo "<th colspan='2'>Tag5</th>";
+	echo "</tr>";
+	echo "<tr>";
+	echo "<th></th>";
+	echo "<th>Punkte</th><th>Team</th>";
+	echo "<th>Punkte</th><th>Team</th>";
+	echo "<th>Punkte</th><th>Team</th>";
+	echo "<th>Punkte</th><th>Team</th>";
+	echo "<th>Punkte</th><th>Team</th>";
 	echo "</tr>";
 	foreach($rows as $key => $row)
 	{
@@ -109,17 +131,30 @@ if(isset($rows))
 		{
 			$keyDay = "tag".$i;
 			$keyPoints = "points".$i;
+			$keyTeam = "team".$i;
 			
 			echo "<td>";
 			if($row[$keyDay]==1)
 			{
-				echo "<input type='number' name='res[$i][".$row['userid']."]' value='".$row[$keyPoints]."'>";	
+				echo "<input type='number' name='res[$i][".$row['userid']."][points]' value='".$row[$keyPoints]."'>";
 			}
 			else
 			{
 				echo "&nbsp;";
 			}
-			echo "</td>";						 
+			echo "</td>";
+			
+			
+			echo "<td>";
+			if($row[$keyDay]==1)
+			{
+				echo "<input type='text' name='res[$i][".$row['userid']."][team]' value='".$row[$keyTeam]."' pattern='[0-3]{1}'>";
+			}
+			else
+			{
+				echo "&nbsp;";
+			}
+			echo "</td>";									 
 			
 		}
 		

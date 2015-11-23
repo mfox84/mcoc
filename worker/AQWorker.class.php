@@ -51,24 +51,29 @@ class AQWorker
 
 	static function insertAQResults($aqid,$results)
 	{
+		
+		
+		
 		// ALTER TABLE `useraqres` DROP PRIMARY KEY, ADD PRIMARY KEY( `uaqres_aq_id`, `uaqres_aqday_id`, `uaqres_user_id`);
 		
 		$pdo = new DBConnector();
 		
 		foreach($results as $tag => $result)
 		{
-			foreach($result as $user => $points)
+			foreach($result as $user => $data)
 			{
-				if($points == "")
+				
+				if($data['points'] == 0)
 					continue;
-					
+		
 				unset($param);	
 				
-				$insert = "replace into useraqres (	uaqres_aq_id , uaqres_aqday_id,	uaqres_user_id, uaqres_points ) values (?,?,?,?)";
+				$insert = "replace into useraqres (	uaqres_aq_id , uaqres_aqday_id,	uaqres_user_id, uaqres_points,uaqres_team ) values (?,?,?,?,?)";
 				$param[] = $aqid;
 				$param[] = $tag;
 				$param[] = $user;
-				$param[] = $points;
+				$param[] = $data['points'];
+				$param[] = $data['team'];
 				
 				$pdo->runInsertPDO($insert,$param);
 			}
@@ -83,7 +88,7 @@ class AQWorker
 	static function getAQResults($aqid)
 	{
 		$pdo = new DBConnector();
-		$select = "select uaqres_aqday_id,uaqres_user_id,uaqres_points from useraqres where uaqres_aq_id = $aqid";
+		$select = "select uaqres_aqday_id,uaqres_user_id,uaqres_points,uaqres_team from useraqres where uaqres_aq_id = $aqid";
 		
 		$result = $pdo->runSelectPDO($select);
 		
@@ -96,7 +101,9 @@ class AQWorker
 				$userid = $row['uaqres_user_id'];
 				$day = $row['uaqres_aqday_id'];
 				$points = $row['uaqres_points'];
-				$results[$day][$userid] = $points;
+				$team = $row['uaqres_team'];
+				$results[$day][$userid]['points'] = $points;
+				$results[$day][$userid]['team'] = $team;
 			}
 			
 				return $results;
@@ -123,6 +130,30 @@ class AQWorker
 		{
 			return 0;	
 		}
+	}
+	
+	static function getTeamCount($aqid)
+	{
+		$pdo = new DBConnector();
+		$select = "SELECT uaqres_aqday_id,uaqres_team,count(*) as anzahl FROM useraqres where uaqres_aq_id = 1 group by uaqres_aqday_id,uaqres_team ORDER BY `uaqres_aqday_id` ASC ";
+		$result = $pdo->runSelectPDO($select);
+		
+		if($result != null)
+		{
+			foreach($result as $row)
+			{
+				
+				$day = $row['uaqres_aqday_id'];
+				$team = $row['uaqres_team'];
+				$teamcount[$day][$team] = $row['anzahl'];
+			}
+			return $teamcount;
+		}
+		else 
+		{
+			return $result;	
+		}
+		
 	}
 	
 }	

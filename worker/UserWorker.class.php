@@ -32,7 +32,7 @@ class UserWorker
 		$pdo = new DBConnector();
 		
 		// Select holt alle Benutzer
-		$select = "SELECT u.user_id,u.user_name,u.user_entrydate,u.user_leftdate FROM `aq` a, users u WHERE user_entrydate <= aq_end and aq_id = $aqid order by u.user_name asc ";
+		$select = "SELECT u.user_id,u.user_name,u.user_entrydate,u.user_leftdate,u.user_defaultteam FROM `aq` a, users u WHERE user_entrydate <= aq_end and aq_id = $aqid order by u.user_name asc ";
 		
 		$result = $pdo->runSelectPDO($select);
 		
