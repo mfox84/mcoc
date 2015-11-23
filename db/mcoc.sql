@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 20. Nov 2015 um 11:07
+-- Erstellungszeit: 23. Nov 2015 um 07:35
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.11
 
@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `useraqres` (
   `uaqres_aq_id` int(11) NOT NULL,
   `uaqres_aqday_id` int(10) unsigned NOT NULL,
   `uaqres_user_id` int(10) unsigned NOT NULL,
+  `uaqres_team` int(11) NOT NULL DEFAULT '0',
   `uaqres_points` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`uaqres_aq_id`,`uaqres_aqday_id`,`uaqres_user_id`),
   KEY `useraqres_FKIndex1` (`uaqres_user_id`),
@@ -149,50 +150,47 @@ CREATE TABLE IF NOT EXISTS `useraqres` (
   KEY `uaqres_aq_id` (`uaqres_aq_id`),
   KEY `uaqres_aqday_id` (`uaqres_aqday_id`),
   KEY `uaqres_user_id` (`uaqres_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=356 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1302 ;
 
 --
 -- Daten für Tabelle `useraqres`
 --
 
-INSERT INTO `useraqres` (`uaqres_id`, `uaqres_aq_id`, `uaqres_aqday_id`, `uaqres_user_id`, `uaqres_points`) VALUES
-(110, 1, 0, 1, 2),
-(112, 1, 0, 2, 5),
-(111, 1, 0, 4, 3543),
-(109, 1, 0, 5, 35453),
-(106, 1, 0, 8, 1),
-(352, 1, 1, 1, 59269),
-(355, 1, 1, 2, 5),
-(354, 1, 1, 3, 500),
-(353, 1, 1, 4, 3543),
-(351, 1, 1, 5, 35453),
-(331, 1, 2, 1, 55859),
-(334, 1, 2, 2, 5),
-(333, 1, 2, 3, 423423),
-(332, 1, 2, 4, 4324),
-(330, 1, 2, 5, 5),
-(329, 1, 2, 8, 32434),
-(337, 1, 3, 1, 124015),
-(339, 1, 3, 2, 5),
-(338, 1, 3, 4, 123),
-(336, 1, 3, 5, 35453),
-(335, 1, 3, 8, 423),
-(342, 1, 4, 1, 123669),
-(345, 1, 4, 2, 5),
-(344, 1, 4, 3, 442342),
-(343, 1, 4, 4, 434534),
-(341, 1, 4, 5, 543),
-(340, 1, 4, 8, 23423),
-(347, 1, 5, 1, 272859),
-(350, 1, 5, 2, 5),
-(349, 1, 5, 3, 789456),
-(348, 1, 5, 4, 423423),
-(346, 1, 5, 8, 124342),
-(196, 2, 1, 5, 111),
-(195, 2, 1, 8, 555),
-(197, 2, 2, 8, 555),
-(198, 2, 3, 8, 555),
-(199, 2, 4, 8, 55);
+INSERT INTO `useraqres` (`uaqres_id`, `uaqres_aq_id`, `uaqres_aqday_id`, `uaqres_user_id`, `uaqres_team`, `uaqres_points`) VALUES
+(1298, 1, 1, 1, 3, 5345),
+(1301, 1, 1, 2, 1, 534),
+(1300, 1, 1, 3, 2, 535),
+(1299, 1, 1, 4, 2, 3435),
+(1297, 1, 1, 5, 3, 354),
+(1275, 1, 2, 1, 3, 5675),
+(1278, 1, 2, 2, 1, 5453),
+(1277, 1, 2, 3, 2, 465),
+(1276, 1, 2, 4, 1, 4543),
+(1274, 1, 2, 5, 3, 5657),
+(1273, 1, 2, 8, 2, 3333),
+(1281, 1, 3, 1, 3, 1),
+(1284, 1, 3, 2, 1, 5),
+(1283, 1, 3, 3, 2, 123),
+(1282, 1, 3, 4, 2, 177554),
+(1280, 1, 3, 5, 1, 3864),
+(1279, 1, 3, 8, 1, 555),
+(1287, 1, 4, 1, 3, 1),
+(1290, 1, 4, 2, 1, 5),
+(1289, 1, 4, 3, 2, 4),
+(1288, 1, 4, 4, 3, 4),
+(1286, 1, 4, 5, 2, 5),
+(1285, 1, 4, 8, 2, 2),
+(1293, 1, 5, 1, 3, 2),
+(1296, 1, 5, 2, 1, 5),
+(1295, 1, 5, 3, 2, 7),
+(1294, 1, 5, 4, 2, 4),
+(1292, 1, 5, 5, 0, 66),
+(1291, 1, 5, 8, 2, 1),
+(875, 2, 1, 5, 0, 111),
+(874, 2, 1, 8, 3, 555),
+(876, 2, 2, 8, 1, 555),
+(877, 2, 3, 8, 0, 555),
+(878, 2, 4, 8, 0, 55);
 
 -- --------------------------------------------------------
 
@@ -205,6 +203,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_name` varchar(200) DEFAULT NULL,
   `user_entrydate` bigint(20) DEFAULT NULL,
   `user_leftdate` bigint(20) DEFAULT NULL,
+  `user_defaultteam` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
@@ -212,15 +211,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_entrydate`, `user_leftdate`) VALUES
-(1, 'Fox', 1445330202, NULL),
-(2, 'Multitalent', 1445330202, NULL),
-(3, 'Jule', 1445330202, NULL),
-(4, 'g0k', 1445330202, NULL),
-(5, 'Flo', 1445330202, NULL),
-(6, 'heinreich', 1447923323, NULL),
-(7, 'lenzer', 1447723348, 1447923348),
-(8, 'blubber', 1446764400, NULL);
+INSERT INTO `users` (`user_id`, `user_name`, `user_entrydate`, `user_leftdate`, `user_defaultteam`) VALUES
+(1, 'Fox', 1445330202, NULL, 3),
+(2, 'Multitalent', 1445330202, NULL, 1),
+(3, 'Jule', 1445330202, NULL, 2),
+(4, 'g0k', 1445330202, NULL, 0),
+(5, 'Flo', 1445330202, NULL, 0),
+(6, 'heinreich', 1447923323, NULL, 0),
+(7, 'lenzer', 1447723348, 1447923348, 0),
+(8, 'blubber', 1446764400, NULL, 2);
 
 -- --------------------------------------------------------
 
