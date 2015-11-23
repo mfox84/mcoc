@@ -60,20 +60,19 @@ class UserWorker
 	
 	static function insertUser($userData)
 	{
-		
 		$pdo = new DBConnector();
 		
 		// Datum umsetzen
 		$temp = explode(".",$userData['entryDate']);
 		$entryDate = mktime(0,0,0,$temp[1],$temp[0],$temp[2]);
 		
-		if(isset($userData['leftDate']))
+		if($userData['leftDate']!="")
 		{
-			$temp = explode(".",$userData['entryDate']);
+			$temp = explode(".",$userData['leftDate']);
 			$leftDate = mktime(23,59,59,$temp[1],$temp[0],$temp[2]);
 		}
 		else
-			$leftDate = 0;
+			$leftDate = null;
 		
 		if(isset($userData['userid']))
 		{
@@ -87,7 +86,7 @@ class UserWorker
 		$param[] = $entryDate;
 		$param[] = $leftDate;
 		$param[] = $userData['defaultTeam'];
-				
+		
 		$pdo->runInsertPDO($insert,$param);
 	}
 	
