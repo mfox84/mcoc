@@ -30,6 +30,9 @@
 		case 'aqresult';
 			include 'includes/aqResultShow.inc.php';
 			break;
+		case 'userform';
+			include 'includes/userForm.inc.php';
+			break;
 	}
 
 	include("includes/footer.inc.php");

@@ -52,10 +52,6 @@ class AQWorker
 	static function insertAQResults($aqid,$results)
 	{
 		
-		
-		
-		// ALTER TABLE `useraqres` DROP PRIMARY KEY, ADD PRIMARY KEY( `uaqres_aq_id`, `uaqres_aqday_id`, `uaqres_user_id`);
-		
 		$pdo = new DBConnector();
 		
 		foreach($results as $tag => $result)

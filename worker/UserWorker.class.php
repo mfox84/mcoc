@@ -58,15 +58,38 @@ class UserWorker
 		return false;
 	}
 	
-	/**
-	 * Holt das Team eines Benutzers zu einem bestimmten Zeitpunkt
-	 */
-	static function getTeamForDate($start,$end)
+	static function insertUser($userData)
 	{
+		
 		$pdo = new DBConnector();
-		$select = "select ";
+		
+		// Datum umsetzen
+		$temp = explode(".",$userData['entryDate']);
+		$entryDate = mktime(0,0,0,$temp[1],$temp[0],$temp[2]);
+		
+		if(isset($userData['leftDate']))
+		{
+			$temp = explode(".",$userData['entryDate']);
+			$leftDate = mktime(23,59,59,$temp[1],$temp[0],$temp[2]);
+		}
+		else
+			$leftDate = 0;
+		
+		if(isset($userData['userid']))
+		{
+			$insert = "replace into users (userid,user_name,user_entrydate, user_leftdate,user_defaultteam  ) values (?,?,?,?,?)";
+			$param[] = $userData['userid'];
+		}
+		else
+			$insert = "insert into users (user_name,user_entrydate, user_leftdate,user_defaultteam  ) values (?,?,?,?)";
+		
+		$param[] = $userData['username'];
+		$param[] = $entryDate;
+		$param[] = $leftDate;
+		$param[] = $userData['defaultTeam'];
+				
+		$pdo->runInsertPDO($insert,$param);
 	}
-	
 	
 	
 }	
