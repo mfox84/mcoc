@@ -7,7 +7,7 @@ class UserWorker
 	function showuser()
 	{
 		$pdo = new DBConnector();
-		$userarr = $pdo->runSelectPDO("select user_id, user_name, userteam_team from users, userteam where user_id=userteam_user_id");
+		$userarr = $pdo->runSelectPDO("select user_id, user_name, user_defaultteam from users order by user_name asc");
 		
 		echo "<table class='user'>";
 		echo "<tr>";
@@ -20,7 +20,7 @@ class UserWorker
 		{
 			echo "<tr>";
 			echo "<td>".$user['user_name']."</td>";
-			echo "<td>".$user['userteam_team']."</td>";		
+			echo "<td>".$user['user_defaultteam']."</td>";		
 			echo "</tr>";
 		}	
 		echo "</table>";	
