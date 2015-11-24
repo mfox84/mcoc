@@ -2,7 +2,14 @@
 	require_once("worker/UserWorker.class.php");
 	require_once("classes/User.class.php");
 	
-	
+	// User hinzufügen bzw. aktualisieren
+	if(isset($_GET['action']) && $_GET['action']=="addUser")
+	{
+		UserWorker::insertUser($_POST);
+		include("includes/user.inc.php");	
+	}
+	else 
+	{
 ?>
 
 <div class='left'>
@@ -12,12 +19,8 @@
 </div>
 	<div class='main'>
 		
-	<?php
-	// User hinzufügen bzw. aktualisieren
-	if(isset($_GET['action']) && $_GET['action']=="addUser")
-	{
-		UserWorker::insertUser($_POST);	
-	}
+	
+<?php
 	
 	$user = new User();
 	
@@ -59,3 +62,6 @@
 </form>
 
 </div>
+<?php
+}
+?>
