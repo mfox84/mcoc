@@ -15,6 +15,7 @@ class UserWorker
 		echo "<th>Team</th>";
 		echo "<th>Beigetreten am</th>";
 		echo "<th>Ausgetreten am</th>";
+		echo "<th>Update</th>";
 		echo "</tr>";
 		
 		
@@ -24,7 +25,8 @@ class UserWorker
 			echo "<td>".$user['user_name']."</td>";
 			echo "<td>".$user['user_defaultteam']."</td>";
 			echo "<td>".date("d.m.Y",$user['user_entrydate'])."</td>";		
-			echo "<td>".($user['user_leftdate'] != 0 ? date("d.m.Y",$user['user_leftdate']):' --- ')."</td>";				
+			echo "<td>".($user['user_leftdate'] != 0 ? date("d.m.Y",$user['user_leftdate']):' --- ')."</td>";
+			echo "<td><a href='?site=userform&userid=".$user['user_id']."'>Update</td>";				
 			echo "</tr>";
 		}	
 		echo "</table>";	
@@ -80,7 +82,7 @@ class UserWorker
 		
 		if(isset($userData['userid']))
 		{
-			$insert = "replace into users (userid,user_name,user_entrydate, user_leftdate,user_defaultteam  ) values (?,?,?,?,?)";
+			$insert = "replace into users (user_id,user_name,user_entrydate, user_leftdate,user_defaultteam  ) values (?,?,?,?,?)";
 			$param[] = $userData['userid'];
 		}
 		else
@@ -94,6 +96,29 @@ class UserWorker
 		$pdo->runInsertPDO($insert,$param);
 	}
 	
+	static function getUser($userid)
+	{
+		$pdo = new DBConnector();
+		$select = "select * from users where user_id = $userid";
+		$result = $pdo->runSelectPDO($select);
+		if($result != null)
+		{
+			$user = new User();
+			$row = $result[0];
+			
+			$user->setUser_id($row['user_id']);
+			$user->setUser_name($row['user_name']);
+			$user->setUser_entrydate(date("d.m.Y",$row['user_entrydate']));
+			$user->setUser_leftdate(($row['user_leftdate'] != null ? date("d.m.Y",$row['user_leftdate']) : ""));
+			$user->setUser_defaultteam($row['user_defaultteam']);
+			
+			return $user;
+		}
+		else 
+		{
+			return null;	
+		}
+	}
 	
 }	
 ?>
