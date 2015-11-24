@@ -11,11 +11,14 @@
 
 <body>
 	<div class='header'>
-		<table>
-			<tr>
-				<td><a href='index.php?site=users'>User</a></td>
-				<td><a href='index.php?site=events'>Events</a></td>
-				<td><a href='index.php?site=aq'>Alliance-Quests</a></td>
-			</tr>
-		</table>
+		<img src='images/logo.png' height='120px' align="left" />
+		
+	</div>
+	<div class='headnav'>
+	<ul>
+				<li><a href='index.php?site=users'>User</a></li>
+				<li><a href='index.php?site=events'>Events</a></li>
+				<li><a href='index.php?site=aq'>Alliance-Quests</a></li>
+			
+		</ul>
 	</div>
