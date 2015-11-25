@@ -17,8 +17,8 @@ class AQWorker
 		{
 			echo "<tr>";
 			echo "<td>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</td>";
-			echo "<td><a href=?site=aqform&aqid=".$aq['aq_id'].">Form</td>";
-			echo "<td><a href=?site=aqresult&aqid=".$aq['aq_id'].">Results</td>";
+			echo "<td><a href='?site=aqform&aqid=".$aq['aq_id']."'>Form</a></td>";
+			echo "<td><a href='?site=aqresult&aqid=".$aq['aq_id']."'>Results</a></td>";
 			echo "</tr>";
 		}	
 		echo "</table>";	

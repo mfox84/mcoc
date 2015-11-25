@@ -136,7 +136,7 @@ if(isset($rows))
 			echo "<td>";
 			if($row[$keyDay]==1)
 			{
-				echo "<input type='number' name='res[$i][".$row['userid']."][points]' value='".$row[$keyPoints]."'>";
+				echo "<input type='number' name='res[$i][".$row['userid']."][points]' value='".$row[$keyPoints]."' size='10'>";
 			}
 			else
 			{
@@ -148,7 +148,7 @@ if(isset($rows))
 			echo "<td>";
 			if($row[$keyDay]==1)
 			{
-				echo "<input type='text' name='res[$i][".$row['userid']."][team]' value='".$row[$keyTeam]."' pattern='[0-3]{1}'>";
+				echo "<input type='text' name='res[$i][".$row['userid']."][team]' value='".$row[$keyTeam]."' pattern='[0-3]{1}' size='3'>";
 			}
 			else
 			{
