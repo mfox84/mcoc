@@ -70,13 +70,13 @@ a{
 }
 
 .headnav li{
-	display: inline;
+	float:left;
 	list-style-type: none;
-	height: 48px;
-	line-height: 48px;
+	line-height: 30px;
 }
 
 .headnav li > a{
+	display: block;
 	padding: 0px 12px;
 	height: 48px;
 }
@@ -84,6 +84,7 @@ a{
 .headnav li:hover > a{
 	background-color: #24890D;
 	color: #FFF;
+	
 }
 
 
