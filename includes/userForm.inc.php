@@ -58,7 +58,7 @@
 			<td><input type="text" name="defaultTeam" value="<?php echo $user->getUser_defaultteam();?>" pattern="[0-3]{1}" required/></td>
 		</tr>
 	</table>
-	<input type="submit">
+	<input type="submit" class="submit">
 </form>
 
 </div>

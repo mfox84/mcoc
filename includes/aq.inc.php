@@ -8,9 +8,9 @@
 		$worker->showAQList();
 	?>
 </div>
-	<div class='main'>
-		<?php
-			
-		?>
+<div class='main'>
+	<?php
 		
-	</div>
+	?>
+	
+</div>

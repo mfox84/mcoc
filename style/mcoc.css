@@ -10,11 +10,15 @@ a{
 	text-decoration: none;
 }
 
+
+/* Div Classes */
+
 .main{
 	position: absolute;
 	width: 1160px;
 	top: 168px;
 	left: 250px;
+	padding: 12px;
 }
 
 .header{
@@ -65,6 +69,7 @@ a{
 }
 
 
+/* Navigation oben */
 .headnav ul{
 	
 	
@@ -79,7 +84,7 @@ a{
 
 .headnav li > a{
 	display: block;
-	padding: 0px 12px;
+	padding: 0px 15px;
 	height: 40px;
 	vertical-align: middle;
 }
@@ -96,6 +101,7 @@ a{
 }
 
 
+/* Navigation links */
 .left ul{
 	
 	
@@ -123,6 +129,12 @@ a{
 
 
 .left a{
+	color: #55D737;
+}
+
+/* Formulare */
+.submit{
+	background-color: #000000;
 	color: #55D737;
 }
 
