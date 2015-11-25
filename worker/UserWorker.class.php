@@ -18,18 +18,20 @@ class UserWorker
 		echo "<th>Update</th>";
 		echo "</tr>";
 		
-		
-		foreach($userarr as $user)
+		if($userarr != null)
 		{
-			echo "<tr>";
-			echo "<td>".$user['user_name']."</td>";
-			echo "<td>".$user['user_defaultteam']."</td>";
-			echo "<td>".date("d.m.Y",$user['user_entrydate'])."</td>";		
-			echo "<td>".($user['user_leftdate'] != 0 ? date("d.m.Y",$user['user_leftdate']):' --- ')."</td>";
-			echo "<td><a href='?site=userform&userid=".$user['user_id']."'>Update</td>";				
-			echo "</tr>";
+			foreach($userarr as $user)
+			{
+				echo "<tr>";
+				echo "<td>".$user['user_name']."</td>";
+				echo "<td>".$user['user_defaultteam']."</td>";
+				echo "<td>".date("d.m.Y",$user['user_entrydate'])."</td>";		
+				echo "<td>".($user['user_leftdate'] != 0 ? date("d.m.Y",$user['user_leftdate']):' --- ')."</td>";
+				echo "<td><a href='?site=userform&userid=".$user['user_id']."'>Update</td>";				
+				echo "</tr>";
+			}	
+			echo "</table>";
 		}	
-		echo "</table>";	
 	}
 	
 	

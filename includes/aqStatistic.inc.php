@@ -24,7 +24,7 @@ if($teamcount!=null)
 		if(!array_key_exists(3, $details))
 			$details[3] = 0;
 		
-		$gesamtDay = $details[1] * $details[2] + $details[3];
+		$gesamtDay = $details[1] + $details[2] + $details[3];
 		
 		echo "<tr><td>$day<td><td>$details[1]<td><td>$details[2]</td><td>$details[3]</td><td>$gesamtDay</td></tr>";			
 	}
