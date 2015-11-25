@@ -33,10 +33,10 @@ a{
 	position: absolute;
 	width: 1280px;
 	background: #000000;
-	height: 48px;
+	height: 68px;
 	padding: 0px;
 	margin: 0px;
-	top: 120px;
+	top: 100px;
 	left: 0px;
 	color: #FFFFFF
 }
@@ -55,12 +55,13 @@ a{
 
 
 .footer{
-	position: absolute;
+	position: fixed;
 	height: 20px;
 	width: 1280px;
-	background: #EBF1E8;
+	background: #000000;
 	bottom: 0px;
 	left: 0px;
+	color: #FFFFFF;
 }
 
 
@@ -73,12 +74,14 @@ a{
 	float:left;
 	list-style-type: none;
 	line-height: 30px;
+	vertical-align: middle;
 }
 
 .headnav li > a{
 	display: block;
 	padding: 0px 12px;
-	height: 48px;
+	height: 40px;
+	vertical-align: middle;
 }
 
 .headnav li:hover > a{
@@ -89,6 +92,37 @@ a{
 
 
 .headnav a{
+	color: #55D737;
+}
+
+
+.left ul{
+	
+	
+}
+
+.left li{
+	list-style-type: none;
+	line-height: 40px;
+	vertical-align: middle;
+	
+}
+
+.left li > a{
+	padding: 0px 0px;
+	height: 30px;
+	vertical-align: middle;
+	display: block;
+}
+
+.left li:hover > a{
+	background-color: #24890D;
+	color: #FFF;
+	
+}
+
+
+.left a{
 	color: #55D737;
 }
 
