@@ -3,10 +3,13 @@
 class AQ
 {
 		private $aq_id;
-		private $aq_start;	
-		private $aq_end	;
-		private $aq_points;	
-		private $aq_result;
+		private $aq_start;	// Startdatum
+		private $aq_end	;	// Enddatum
+		private $aq_points;	// Gesamtpunkt
+		private $aq_rank; // Rang
+		private $aq_missions; // Array mit den Missionen pro Tag
+		private $aq_percent; // Array mit den Prozent pro Tag
+		private $aq_prestige; // Array mit Prestige pro Tag
 		
 		
 	public function getAq_id(){
@@ -41,11 +44,35 @@ class AQ
 		$this->aq_points = $aq_points;
 	}
 
-	public function getAq_result(){
-		return $this->aq_result;
+	public function getAq_rank(){
+		return $this->aq_rank;
 	}
 
-	public function setAq_result($aq_result){
-		$this->aq_result = $aq_result;
+	public function setAq_rank($aq_rank){
+		$this->aq_rank = $aq_rank;
+	}
+	
+		public function getAq_missions(){
+		return $this->aq_missions;
+	}
+
+	public function setAq_missions($aq_missions){
+		$this->aq_missions = $aq_missions;
+	}
+
+	public function getAq_percent(){
+		return $this->aq_percent;
+	}
+
+	public function setAq_percent($aq_percent){
+		$this->aq_percent = $aq_percent;
+	}
+
+	public function getAq_prestige(){
+		return $this->aq_prestige;
+	}
+
+	public function setAq_prestige($aq_prestige){
+		$this->aq_prestige = $aq_prestige;
 	}
 }

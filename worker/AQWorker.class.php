@@ -16,8 +16,8 @@ class AQWorker
 		foreach($aqarr as $aq)
 		{
 			echo "<tr>";
-			echo "<td>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</td>";
-			echo "<td><a href='?site=aqform&aqid=".$aq['aq_id']."'>Form</a></td>";
+			echo "<td><a href='?site=aqform&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a></td>";
+			echo "<td><a href='?site=aqresultform&aqid=".$aq['aq_id']."'>Form</a></td>";
 			echo "<td><a href='?site=aqresult&aqid=".$aq['aq_id']."'>Results</a></td>";
 			echo "</tr>";
 		}	
@@ -37,8 +37,39 @@ class AQWorker
 			$aq->setAq_id($id);
 			$aq->setAq_start($row['aq_start']);
 			$aq->setAq_end($row['aq_end']);
-			$aq->setAq_points($row['aq_points']);
-			$aq->setAq_result($row['aq_result']);
+			$aq->setAq_rank($row['aq_rank']);
+			
+			
+			// Missionen, Prozent und Prestige holen
+			$select = "select aqday_number,ayday_percent,ayday_mission,aqday_prestige from aqday where aqday_aq_id = $id";
+			
+			$res = $pdo->runSelectPDO($select);
+			
+			$mission = array();
+			$prestige = array();
+			$percent = array();
+			
+			if($res != null)
+			{
+			
+				foreach($res as $row)
+				{
+					$mission[$row['aqday_number']] = $row['ayday_mission'];
+					$prestige[$row['aqday_number']] = $row['aqday_prestige'];
+					$percent[$row['aqday_number']] = $row['ayday_percent'];
+				}
+			}
+			else 
+			{
+				$mission = null;
+				$prestige = null;
+				$percent = null;	
+			}			
+			
+			$aq->setAq_missions($mission);
+			$aq->setAq_percent($percent);
+			$aq->setAq_prestige($prestige);	
+			
 			
 			return $aq;
 		}
@@ -48,6 +79,8 @@ class AQWorker
 		}
 		
 	}
+	
+	
 
 	static function insertAQResults($aqid,$results)
 	{
@@ -150,6 +183,52 @@ class AQWorker
 			return $result;	
 		}
 		
+	}
+	
+	static function insertAQ($AQData)
+	{
+		$pdo = new DBConnector();
+		
+		// Datum umsetzen
+		$temp = explode(".",$AQData['startDate']);
+		$startDate = mktime(0,0,0,$temp[1],$temp[0],$temp[2]);
+		
+		$temp = explode(".",$AQData['endDate']);
+		$endDate = mktime(23,59,59,$temp[1],$temp[0],$temp[2]);
+		
+		// Grunddaten eintragen
+		if(isset($AQData['aqid']))
+		{
+			$insert = "replace into aq ( aq_id, aq_start,aq_end,aq_rank  ) values (?,?,?,?)";
+			$param[] = $AQData['aqid'];
+		}
+		else
+			$insert = "insert into aq (aq_start,aq_end,aq_rank ) values (?,?,?)";
+		
+		$param[] = $startDate;
+		$param[] = $endDate;
+		$param[] = $AQData['rank'];
+		
+		$aqid = $pdo->runInsertPDO($insert,$param);
+		//if(isset($AQData['aqid']))
+			//$aqid = $AQData['aqid']);
+		
+		// Details eintragen
+		for($i = 1;$i<=5;$i++)
+		{
+			unset($param);
+			
+			$insert = "replace into aqday ( aqday_aq_id,aqday_number,ayday_percent,ayday_mission,aqday_prestige ) values (?,?,?,?,?)";
+			
+			$param[] = $aqid;
+			$param[] = $i;
+			$param[] = $AQData['percent'][$i];
+			$param[] = $AQData['mission'][$i];
+			$param[] = $AQData['prestige'][$i];
+			
+			$pdo->runInsertPDO($insert,$param);
+			 
+		}
 	}
 	
 }	

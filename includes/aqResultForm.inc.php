@@ -134,7 +134,7 @@ if(isset($rows))
 			$keyTeam = "team".$i;
 			
 			echo "<td>";
-			if($row[$keyDay]==1)
+			if(array_key_exists($keyDay, $row) && $row[$keyDay]==1)
 			{
 				echo "<input type='number' name='res[$i][".$row['userid']."][points]' value='".$row[$keyPoints]."' size='10'>";
 			}
@@ -146,7 +146,7 @@ if(isset($rows))
 			
 			
 			echo "<td>";
-			if($row[$keyDay]==1)
+			if(array_key_exists($keyDay, $row) && $row[$keyDay]==1)
 			{
 				echo "<input type='text' name='res[$i][".$row['userid']."][team]' value='".$row[$keyTeam]."' pattern='[0-3]{1}' size='3'>";
 			}

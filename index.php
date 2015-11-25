@@ -24,7 +24,7 @@
 		case 'main';
 			include 'includes/main.inc.php';
 			break;
-		case 'aqform';
+		case 'aqresultform';
 			include 'includes/aqResultForm.inc.php';
 			break;
 		case 'aqresult';
@@ -32,6 +32,9 @@
 			break;
 		case 'userform';
 			include 'includes/userForm.inc.php';
+			break;
+		case 'aqform';
+			include 'includes/aqForm.inc.php';
 			break;
 	}
 

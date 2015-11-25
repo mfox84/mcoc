@@ -71,6 +71,7 @@ class UserWorker
 		{
 			$temp = explode(".",$userData['leftDate']);
 			$leftDate = mktime(23,59,59,$temp[1],$temp[0],$temp[2]);
+			$leftDate+=1;
 		}
 		else
 			$leftDate = null;
