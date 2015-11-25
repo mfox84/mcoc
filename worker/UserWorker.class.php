@@ -3,35 +3,28 @@
 	
 class UserWorker
 {
-	
-	function showuser()
+	/**
+	 * Holt alle Benutzer
+	 * 
+	 * @param boolean aktiv (true = nur aktive Benutzer, false = nur inaktive, null = alle, Standard ist true)
+	 */
+	function showuser($aktiv=1)
 	{
 		$pdo = new DBConnector();
-		$userarr = $pdo->runSelectPDO("select user_id, user_name, user_defaultteam,user_entrydate,user_leftdate from users order by user_name asc");
+	
+		if($aktiv == null)
+			$where = "";
+		else if($aktiv)
+			$where = "where user_leftdate is null";
+		else if(!$aktiv)
+			$where = "where user_leftdate is not null";
+	
+		$select = "select user_id, user_name, user_defaultteam,user_entrydate,user_leftdate from users $where order by user_name asc";
+		$userarr = $pdo->runSelectPDO($select);
 		
-		echo "<table class='user'>";
-		echo "<tr>";
-		echo "<th>Name</th>";
-		echo "<th>Team</th>";
-		echo "<th>Beigetreten am</th>";
-		echo "<th>Ausgetreten am</th>";
-		echo "<th>Update</th>";
-		echo "</tr>";
+		return $userarr;
 		
-		if($userarr != null)
-		{
-			foreach($userarr as $user)
-			{
-				echo "<tr>";
-				echo "<td>".$user['user_name']."</td>";
-				echo "<td>".$user['user_defaultteam']."</td>";
-				echo "<td>".date("d.m.Y",$user['user_entrydate'])."</td>";		
-				echo "<td>".($user['user_leftdate'] != 0 ? date("d.m.Y",$user['user_leftdate']):' --- ')."</td>";
-				echo "<td><a href='?site=userform&userid=".$user['user_id']."'>Update</td>";				
-				echo "</tr>";
-			}	
-			echo "</table>";
-		}	
+			
 	}
 	
 	
@@ -98,6 +91,9 @@ class UserWorker
 		$pdo->runInsertPDO($insert,$param);
 	}
 	
+	/**
+	 * Holt die Daten eines bestimmten Benutzers
+	 */
 	static function getUser($userid)
 	{
 		$pdo = new DBConnector();
