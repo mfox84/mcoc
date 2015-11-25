@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 25. Nov 2015 um 06:38
+-- Erstellungszeit: 25. Nov 2015 um 14:36
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.11
 
@@ -31,18 +31,18 @@ CREATE TABLE IF NOT EXISTS `aq` (
   `aq_start` bigint(20) DEFAULT NULL,
   `aq_end` bigint(20) DEFAULT NULL,
   `aq_points` int(10) unsigned DEFAULT NULL,
-  `aq_result` int(10) unsigned DEFAULT NULL,
+  `aq_rank` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`aq_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Daten für Tabelle `aq`
 --
 
-INSERT INTO `aq` (`aq_id`, `aq_start`, `aq_end`, `aq_points`, `aq_result`) VALUES
+INSERT INTO `aq` (`aq_id`, `aq_start`, `aq_end`, `aq_points`, `aq_rank`) VALUES
 (1, 1446678000, 1447109999, 9500000, 75),
 (2, 1447887600, 1448319599, NULL, NULL),
-(3, 1447887600, 1448319599, NULL, NULL);
+(3, 1448319600, 1448837999, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -52,15 +52,28 @@ INSERT INTO `aq` (`aq_id`, `aq_start`, `aq_end`, `aq_points`, `aq_result`) VALUE
 
 CREATE TABLE IF NOT EXISTS `aqday` (
   `aqday_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `aqday_aq_id` int(10) unsigned NOT NULL,
-  `aqday_number` int(10) unsigned DEFAULT NULL,
-  `aqday_result` int(10) unsigned DEFAULT NULL,
-  `ayday_percent` int(10) unsigned DEFAULT NULL,
+  `aqday_aq_id` int(11) NOT NULL,
+  `aqday_number` int(10) unsigned NOT NULL,
+  `aqday_result` int(10) unsigned NOT NULL,
+  `ayday_percent` int(11) NOT NULL DEFAULT '0',
   `ayday_mission` varchar(100) DEFAULT NULL,
   `aqday_prestige` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`aqday_id`),
-  KEY `aqday_FKIndex1` (`aqday_aq_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`aqday_aq_id`,`aqday_number`),
+  KEY `aqday_id` (`aqday_id`),
+  KEY `aqday_aq_id` (`aqday_aq_id`),
+  KEY `aqday_number` (`aqday_number`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Daten für Tabelle `aqday`
+--
+
+INSERT INTO `aqday` (`aqday_id`, `aqday_aq_id`, `aqday_number`, `aqday_result`, `ayday_percent`, `ayday_mission`, `aqday_prestige`) VALUES
+(1, 3, 1, 0, 0, '', 0),
+(2, 3, 2, 0, 0, '', 0),
+(3, 3, 3, 0, 0, '', 0),
+(4, 3, 4, 0, 0, '', 0),
+(5, 3, 5, 0, 0, '', 0);
 
 -- --------------------------------------------------------
 
