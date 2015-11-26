@@ -78,7 +78,7 @@ class AQWorker
 	{
 		$pdo = new DBConnector();
 		
-		$select = "select aq_id from aq order by aq_start limit $limit";
+		$select = "select aq_id from aq order by aq_start desc limit $limit";
 		$quests = $pdo->runSelectPDO($select);
 		
 		$questList = array();		
