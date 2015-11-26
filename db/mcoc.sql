@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 25. Nov 2015 um 14:36
+-- Erstellungszeit: 26. Nov 2015 um 07:41
 -- Server Version: 5.6.16
 -- PHP-Version: 5.5.11
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `aq` (
 --
 
 INSERT INTO `aq` (`aq_id`, `aq_start`, `aq_end`, `aq_points`, `aq_rank`) VALUES
-(1, 1446678000, 1447109999, 9500000, 75),
+(1, 1446678000, 1447109999, NULL, 103),
 (2, 1447887600, 1448319599, NULL, NULL),
 (3, 1448319600, 1448837999, NULL, 0);
 
@@ -55,20 +55,25 @@ CREATE TABLE IF NOT EXISTS `aqday` (
   `aqday_aq_id` int(11) NOT NULL,
   `aqday_number` int(10) unsigned NOT NULL,
   `aqday_result` int(10) unsigned NOT NULL,
-  `ayday_percent` int(11) NOT NULL DEFAULT '0',
-  `ayday_mission` varchar(100) DEFAULT NULL,
-  `aqday_prestige` int(10) unsigned DEFAULT NULL,
+  `aqday_percent` int(11) NOT NULL DEFAULT '0',
+  `aqday_mission` varchar(100) DEFAULT NULL,
+  `aqday_prestige` int(10) DEFAULT NULL,
   PRIMARY KEY (`aqday_aq_id`,`aqday_number`),
   KEY `aqday_id` (`aqday_id`),
   KEY `aqday_aq_id` (`aqday_aq_id`),
   KEY `aqday_number` (`aqday_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Daten für Tabelle `aqday`
 --
 
-INSERT INTO `aqday` (`aqday_id`, `aqday_aq_id`, `aqday_number`, `aqday_result`, `ayday_percent`, `ayday_mission`, `aqday_prestige`) VALUES
+INSERT INTO `aqday` (`aqday_id`, `aqday_aq_id`, `aqday_number`, `aqday_result`, `aqday_percent`, `aqday_mission`, `aqday_prestige`) VALUES
+(21, 1, 1, 0, 100, '3. Trennende Wege', 339),
+(22, 1, 2, 0, 97, '3. Trennende Wege', 150),
+(23, 1, 3, 0, 100, '2. Linked Power', 339),
+(24, 1, 4, 0, 99, '2. Linked Power', 151),
+(25, 1, 5, 0, 77, '3. Trennende Wege', -250),
 (1, 3, 1, 0, 0, '', 0),
 (2, 3, 2, 0, 0, '', 0),
 (3, 3, 3, 0, 0, '', 0),
@@ -164,43 +169,44 @@ CREATE TABLE IF NOT EXISTS `useraqres` (
   KEY `uaqres_aq_id` (`uaqres_aq_id`),
   KEY `uaqres_aqday_id` (`uaqres_aqday_id`),
   KEY `uaqres_user_id` (`uaqres_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1492 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1523 ;
 
 --
 -- Daten für Tabelle `useraqres`
 --
 
 INSERT INTO `useraqres` (`uaqres_id`, `uaqres_aq_id`, `uaqres_aqday_id`, `uaqres_user_id`, `uaqres_team`, `uaqres_points`) VALUES
-(1475, 1, 1, 22, 1, 150769),
-(1483, 1, 1, 23, 3, 175469),
-(1488, 1, 1, 24, 3, 113934),
-(1490, 1, 1, 25, 2, 142561),
-(1474, 1, 1, 26, 2, 59269),
-(1478, 1, 1, 27, 1, 85028),
-(1467, 1, 1, 28, 1, 49820),
-(1466, 1, 1, 29, 2, 107933),
-(1491, 1, 1, 30, 1, 42318),
-(1479, 1, 1, 31, 2, 51309),
-(1481, 1, 1, 32, 3, 70752),
-(1477, 1, 1, 33, 3, 75054),
-(1489, 1, 1, 34, 3, 65060),
-(1464, 1, 1, 35, 1, 54716),
-(1487, 1, 1, 36, 2, 55743),
-(1472, 1, 1, 37, 1, 63065),
-(1485, 1, 1, 38, 2, 53760),
-(1473, 1, 1, 39, 3, 39288),
-(1482, 1, 1, 40, 3, 52989),
-(1484, 1, 1, 41, 3, 43980),
-(1463, 1, 1, 42, 2, 58247),
-(1469, 1, 1, 43, 2, 41351),
-(1465, 1, 1, 44, 2, 37823),
-(1471, 1, 1, 45, 2, 68695),
-(1462, 1, 1, 46, 1, 58787),
-(1476, 1, 1, 47, 3, 14420),
-(1468, 1, 1, 48, 3, 25745),
-(1486, 1, 1, 49, 1, 22163),
-(1480, 1, 1, 50, 1, 8027),
-(1470, 1, 1, 51, 1, 19372);
+(1505, 1, 1, 22, 1, 150769),
+(1513, 1, 1, 23, 3, 175469),
+(1518, 1, 1, 24, 3, 113934),
+(1520, 1, 1, 25, 2, 142561),
+(1504, 1, 1, 26, 2, 59269),
+(1508, 1, 1, 27, 1, 85028),
+(1497, 1, 1, 28, 1, 49820),
+(1496, 1, 1, 29, 2, 107933),
+(1521, 1, 1, 30, 1, 42318),
+(1509, 1, 1, 31, 2, 51309),
+(1511, 1, 1, 32, 3, 70752),
+(1507, 1, 1, 33, 3, 75054),
+(1519, 1, 1, 34, 3, 65060),
+(1494, 1, 1, 35, 1, 54716),
+(1517, 1, 1, 36, 2, 55743),
+(1502, 1, 1, 37, 1, 63065),
+(1515, 1, 1, 38, 2, 53760),
+(1503, 1, 1, 39, 3, 39288),
+(1512, 1, 1, 40, 3, 52989),
+(1514, 1, 1, 41, 3, 43980),
+(1493, 1, 1, 42, 2, 58247),
+(1499, 1, 1, 43, 2, 41351),
+(1495, 1, 1, 44, 2, 37823),
+(1501, 1, 1, 45, 2, 68695),
+(1492, 1, 1, 46, 1, 58787),
+(1506, 1, 1, 47, 3, 14420),
+(1498, 1, 1, 48, 3, 25745),
+(1516, 1, 1, 49, 1, 22163),
+(1510, 1, 1, 50, 1, 8027),
+(1500, 1, 1, 51, 1, 19372),
+(1522, 1, 2, 46, 1, 49831);
 
 -- --------------------------------------------------------
 
