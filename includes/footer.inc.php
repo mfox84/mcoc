@@ -10,5 +10,6 @@
   */
 ?>
 <div class="footer">Fox</div>
+</div>
 </body>
 </html>

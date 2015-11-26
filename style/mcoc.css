@@ -1,9 +1,14 @@
+*{
+	margin: 0px;
+}
+
 html{
-	
+	height: 100%;
 }
 
 body{
 	font-family: Lato,sans-serif;
+	height 100%;
 }
 
 a{
@@ -18,11 +23,10 @@ a{
 	width: 1160px;
 	top: 168px;
 	left: 250px;
-	padding: 12px;
+	padding: 12px 12px 20px 12px;
 }
 
 .header{
-	position: absolute;
 	width: 1280px;
 	background: #000000;
 	height: 120px;
@@ -34,7 +38,6 @@ a{
 }
 
 .headnav{
-	position: absolute;
 	width: 1280px;
 	background: #000000;
 	height: 68px;
@@ -46,15 +49,13 @@ a{
 }
 
 .left{
-	position: absolute;
-	top: 168px;
 	width: 250px;
 	background: #000000;
-	bottom: 0px;
 	padding: 0px;
 	margin: 0px;
 	left: 0px;
-	color: #FFFFFF;	
+	color: #FFFFFF;
+	float: left;
 }
 
 
@@ -66,6 +67,13 @@ a{
 	bottom: 0px;
 	left: 0px;
 	color: #FFFFFF;
+}
+
+.wrapper{
+	position: absolute;
+	min-height: 100%;
+	width: 1280px;
+	margin: 0 auto;
 }
 
 
@@ -132,11 +140,22 @@ a{
 	color: #55D737;
 }
 
+.lefthead{
+	font-size: large;
+}
+
 /* Formulare */
 .submit{
 	background-color: #000000;
 	color: #55D737;
 }
+
+.submit_nav{
+	background-color: #000000;
+	color: #55D737;
+	border-style: outset;
+}
+
 
 /* Enfernt die Buttons beim Eingabefeld entfernen */ 
 input[type=number]::-webkit-outer-spin-button,

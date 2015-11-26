@@ -180,12 +180,15 @@ echo "<tr>";
 	}
 	echo "</table>";
 	echo "</form>";
+	
+	echo "<form action='?site=aqform&aqid=$aqid' method='post'>";
+	echo "<input type='submit' value='bearbeiten' class='submit'>";
+	echo "</form>";
 }
 
 	
 
 					
-		?>
-		
+		?> 		
 	</div>
 

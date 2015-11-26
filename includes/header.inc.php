@@ -10,6 +10,7 @@
 </head>
 
 <body>
+	<div class="wrapper">
 	<div class='header'>
 		<img src='images/logo.png' height='120px' align="left" />
 		

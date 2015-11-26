@@ -161,7 +161,7 @@ if(isset($rows))
 		echo "</tr>";
 	}
 	echo "</table>";
-	echo "<input type='submit'>";
+	echo "<input type='submit' value='speichern' class='submit'>";
 	echo "</form>";
 }
 

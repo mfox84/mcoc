@@ -7,11 +7,13 @@
 		$worker = new AQWorker();
 		$aqarr = $worker->showAQList();
 		
+		echo "<p class='lefthead'>Allianzmissionen<p>";
+		
 		if($aqarr != null)
 		{
+			/*
 			echo "<table class='aqlist'>";
-			
-			
+						
 			foreach($aqarr as $aq)
 			{
 				echo "<tr>";
@@ -20,10 +22,25 @@
 				echo "<td><a href='?site=aqresult&aqid=".$aq['aq_id']."'>Results</a></td>";
 				echo "</tr>";
 			}	
-			echo "</table>";	
+			echo "</table>";
+			*/
+			
+			echo "<ul>";
+			foreach($aqarr as $aq)
+			{
+				echo "<li>";
+				echo "<a href='?site=aqresultform&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a>";
+				echo "</a>";
+				echo "</li>";
+			}	
+			echo "</ul>";	
 		}
 	?>
-	<br><a href="?site=aqform">AQ hinzufügen</a>
+	<p align="right">
+	<form action='?site=aqform' method='post'>
+	<input type='submit' value='AQ hinzufügen' class='submit'>
+	</form>
+	</p>
 </div>
 <div class='main'>
 	<h2>Übersicht der letzten 10 Quests</h2>
