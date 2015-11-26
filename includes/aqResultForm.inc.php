@@ -34,7 +34,7 @@ else
 	$aq = AQWorker::getAQDetails($_GET['aqid']);
 	
 	// Gesamtpunkte holen
-	$pointsTotalAQ = AQWorker::getPointsTotal($aqid);
+	$pointsTotalAQ = AQWorker::getTotalPoints($aqid);
 	
 	// Schon vorhandene Punkte holen, um das Formular ggfs. zu füllen
 	$results = AQWorker::getAQResults($aqid);
@@ -103,7 +103,7 @@ include("includes/aqStatistic.inc.php");
 // Formular aufspannen
 if(isset($rows))
 {
-	echo "<form action='?site=aqform&aqid=$aqid&action=insertResults' method='post'>";
+	echo "<form action='?site=aqresultform&aqid=$aqid&action=insertResults' method='post'>";
 	echo "<table>";
 	echo "<tr>";
 	echo "<th>Username</th>";

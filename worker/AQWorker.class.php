@@ -4,26 +4,20 @@
 	
 class AQWorker
 {
-	
+	/**
+	 * Liste aller Quests zurückgeben
+	 */
 	function showAQList()
 	{
 		$pdo = new DBConnector();
 		$aqarr = $pdo->runSelectPDO("select aq_id, aq_start, aq_end from aq");
 		
-		echo "<table class='aqlist'>";
-		
-		
-		foreach($aqarr as $aq)
-		{
-			echo "<tr>";
-			echo "<td><a href='?site=aqform&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a></td>";
-			echo "<td><a href='?site=aqresultform&aqid=".$aq['aq_id']."'>Form</a></td>";
-			echo "<td><a href='?site=aqresult&aqid=".$aq['aq_id']."'>Results</a></td>";
-			echo "</tr>";
-		}	
-		echo "</table>";	
+		return $aqarr;
 	}
 	
+	/**
+	 * Details einer Quest holen
+	 */
 	static function getAQDetails($id)
 	{
 		$pdo = new DBConnector();
@@ -41,7 +35,7 @@ class AQWorker
 			
 			
 			// Missionen, Prozent und Prestige holen
-			$select = "select aqday_number,ayday_percent,ayday_mission,aqday_prestige from aqday where aqday_aq_id = $id";
+			$select = "select aqday_number,aqday_percent,aqday_mission,aqday_prestige from aqday where aqday_aq_id = $id";
 			
 			$res = $pdo->runSelectPDO($select);
 			
@@ -54,9 +48,9 @@ class AQWorker
 			
 				foreach($res as $row)
 				{
-					$mission[$row['aqday_number']] = $row['ayday_mission'];
+					$mission[$row['aqday_number']] = $row['aqday_mission'];
 					$prestige[$row['aqday_number']] = $row['aqday_prestige'];
-					$percent[$row['aqday_number']] = $row['ayday_percent'];
+					$percent[$row['aqday_number']] = $row['aqday_percent'];
 				}
 			}
 			else 
@@ -79,7 +73,77 @@ class AQWorker
 		}
 		
 	}
+
+	static function getLastQuests($limit=10)
+	{
+		$pdo = new DBConnector();
+		
+		$select = "select aq_id from aq order by aq_start limit $limit";
+		$quests = $pdo->runSelectPDO($select);
+		
+		$questList = array();		
+		
+		// Nun die Ergebnisse der Quests holen
+		foreach($quests as $row)
+		{
+			$aqid = $row['aq_id'];
+			$AQ = new AQ();
+			$AQ = self::getAQDetails($aqid);
+			
+			// Gesamtsummen holen und speichern
+			$AQ->setAq_totalSum(self::getTotalPoints($aqid));
+			
+			$dailyPoints = array();
+			
+			for($i = 1;$i<=5;$i++)
+			{
+				$dailyPoints[$i] = self::getTotalPoints($aqid,$i);
+			}
+			
+			$AQ->setAq_sumsPerDay($dailyPoints);
+			
+			
+			$questList[] = $AQ;
+		}
+		
+		return $questList;
+		
+		
+	}
 	
+	/**
+	 * Holt Summen für Quests
+	 * 
+	 * @param int aqid ID der Quest
+	 * @param int day Tag der Quest, 0 = Summe aller Tage 
+	 */
+	static function getTotalPoints($aqid,$day=0)
+	{
+		$pdo = new DBConnector();
+		
+		if(!$day) // Summe aller Tage zusammen holen
+		{
+			$select = "select sum(uaqres_points) as summe from useraqres where uaqres_aq_id = $aqid";
+		}
+		else // Summe eines bestimmten Tages holen 
+		{
+			$select = "select sum(uaqres_points) as summe from useraqres where uaqres_aq_id = $aqid and uaqres_aqday_id = $day";
+		}
+		
+		$result = $pdo->runSelectPDO($select);
+		
+		if($result != null)
+		{
+			if($result[0]['summe'] != "")
+				return $result[0]['summe'];
+			else
+				return 0;
+		}
+		else 
+		{
+			return 0;
+		}
+	}
 	
 
 	static function insertAQResults($aqid,$results)
@@ -143,24 +207,6 @@ class AQWorker
 		}
 	}
 	
-	/** 
-	 * Holt die Gesamtpunkte einer AllianzQuest
-	 */
-	static function getPointsTotal($aqid)
-	{
-		$pdo = new DBConnector();
-		$select = "SELECT sum(uaqres_points) as summe FROM `useraqres` where uaqres_aq_id = $aqid ";
-		$result = $pdo->runSelectPDO($select);
-		if($result != null)
-		{
-			return $result[0]['summe'];
-		}
-		else 
-		{
-			return 0;	
-		}
-	}
-	
 	static function getTeamCount($aqid)
 	{
 		$pdo = new DBConnector();
@@ -218,7 +264,7 @@ class AQWorker
 		{
 			unset($param);
 			
-			$insert = "replace into aqday ( aqday_aq_id,aqday_number,ayday_percent,ayday_mission,aqday_prestige ) values (?,?,?,?,?)";
+			$insert = "replace into aqday ( aqday_aq_id,aqday_number,aqday_percent,aqday_mission,aqday_prestige ) values (?,?,?,?,?)";
 			
 			$param[] = $aqid;
 			$param[] = $i;

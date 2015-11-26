@@ -10,6 +10,8 @@ class AQ
 		private $aq_missions; // Array mit den Missionen pro Tag
 		private $aq_percent; // Array mit den Prozent pro Tag
 		private $aq_prestige; // Array mit Prestige pro Tag
+		private $aq_sumsPerDay; // Array mit Tagessummen der Punkte
+		private $aq_totalSum; // Gesamtsumme der Quest
 		
 		
 	public function getAq_id(){
@@ -74,5 +76,21 @@ class AQ
 
 	public function setAq_prestige($aq_prestige){
 		$this->aq_prestige = $aq_prestige;
+	}
+	
+		public function getAq_sumsPerDay(){
+		return $this->aq_sumsPerDay;
+	}
+
+	public function setAq_sumsPerDay($aq_sumsPerDay){
+		$this->aq_sumsPerDay = $aq_sumsPerDay;
+	}
+
+	public function getAq_totalSum(){
+		return $this->aq_totalSum;
+	}
+
+	public function setAq_totalSum($aq_totalSum){
+		$this->aq_totalSum = $aq_totalSum;
 	}
 }

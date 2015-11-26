@@ -35,7 +35,7 @@ else
 	$aq = AQWorker::getAQDetails($aqid);
 
 	// Gesamtpunkte holen
-	$pointsTotalAQ = AQWorker::getPointsTotal($aqid);
+	$pointsTotalAQ = AQWorker::getTotalPoints($aqid);
 	
 	// Schon vorhandene Punkte holen, um das Formular ggfs. zu füllen
 	$results = AQWorker::getAQResults($aqid);
