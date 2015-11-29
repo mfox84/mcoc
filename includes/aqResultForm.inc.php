@@ -7,8 +7,42 @@
 <td class='left'>
 	<?php
 		$worker = new AQWorker();
-		$worker->showAQList();
+		$aqarr = $worker->showAQList();
+		
+		echo "<p class='lefthead'>Allianzmissionen<p>";
+		
+		if($aqarr != null)
+		{
+			/*
+			echo "<table class='aqlist'>";
+						
+			foreach($aqarr as $aq)
+			{
+				echo "<tr>";
+				echo "<td><a href='?site=aqform&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a></td>";
+				echo "<td><a href='?site=aqresultform&aqid=".$aq['aq_id']."'>Form</a></td>";
+				echo "<td><a href='?site=aqresult&aqid=".$aq['aq_id']."'>Results</a></td>";
+				echo "</tr>";
+			}	
+			echo "</table>";
+			*/
+			
+			echo "<ul>";
+			foreach($aqarr as $aq)
+			{
+				echo "<li>";
+				echo "<a href='?site=aqresultform&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a>";
+				echo "</a>";
+				echo "</li>";
+			}	
+			echo "</ul>";	
+		}
 	?>
+	<p align="right">
+	<form action='?site=aqform' method='post'>
+	<input type='submit' value='AQ hinzufügen' class='submit'>
+	</form>
+	</p>
 </td>
 	<td class='main'>
 		<?php
@@ -136,7 +170,7 @@ if(isset($rows))
 			echo "<td>";
 			if(array_key_exists($keyDay, $row) && $row[$keyDay]==1)
 			{
-				echo "<input type='number' name='res[$i][".$row['userid']."][points]' value='".$row[$keyPoints]."' size='10'>";
+				echo "<input type='number' name='res[$i][".$row['userid']."][points]' value='".$row[$keyPoints]."' size='8'>";
 			}
 			else
 			{

@@ -29,7 +29,7 @@
 			foreach($aqarr as $aq)
 			{
 				echo "<li>";
-				echo "<a href='?site=aqresultform&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a>";
+				echo "<a href='?site=aqresult&aqid=".$aq['aq_id']."'>".date("Y-m-d",$aq['aq_start'])." - ".date("Y-m-d",$aq['aq_end'])."</a>";
 				echo "</a>";
 				echo "</li>";
 			}	

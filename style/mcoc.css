@@ -19,9 +19,9 @@ a{
 /* Div Classes */
 
 .main{
-	position: absolute;
-	width: 1160px;
+	width: 1030px;
 	padding: 12px 12px 20px 12px;
+	vertical-align: top;
 }
 
 .header{
@@ -49,23 +49,20 @@ a{
 	margin: 0px;
 	color: #FFFFFF;
 	vertical-align: top;
+	height: 100%;
 }
 
 
 .footer{
-	position: fixed;
 	height: 20px;
-	width: 1280px;
 	background: #000000;
-	bottom: 0px;
-	left: 0px;
 	color: #FFFFFF;
 }
 
 .wrapper{
 	position: absolute;
-	min-height: 100%;
 	width: 1280px;
+	min-height: 100%;
 }
 
 
@@ -171,7 +168,7 @@ table.aqresult
 .aqresult td
 {
 	border: 1px dotted black;
-	width: 100px;
+	width: 80px;
 	text-align: center;
 }	
 
@@ -185,5 +182,5 @@ table.aqdetails
 .aqdetails td
 {
 	border: 1px dotted red;
-	width: 100px;
+	width: 80px;
 }	
