@@ -12,12 +12,12 @@
 	{
 ?>
 
-<div class='left'>
+<td class='left'>
 	<?php
 		
 	?>
-</div>
-	<div class='main'>
+</td>
+	<td class='main'>
 		
 	
 <?php
@@ -61,7 +61,7 @@
 	<input type="submit" class="submit">
 </form>
 
-</div>
+</td>
 <?php
 }
 ?>

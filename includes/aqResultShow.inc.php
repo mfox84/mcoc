@@ -4,13 +4,13 @@
 	require_once("worker/UserWorker.class.php");
 ?>
 
-<div class='left'>
+<td class='left'>
 	<?php
 		$worker = new AQWorker();
 		$worker->showAQList();
 	?>
-</div>
-	<div class='main'>
+</td>
+	<td class='main'>
 		<?php
 
 		
@@ -190,5 +190,5 @@ echo "<tr>";
 
 					
 		?> 		
-	</div>
+	</td>
 

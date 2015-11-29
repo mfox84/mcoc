@@ -2,7 +2,7 @@
 	require_once 'worker/AQWorker.class.php';
 ?>
 
-<div class='left'>
+<td class='left'>
 	<?php
 		$worker = new AQWorker();
 		$aqarr = $worker->showAQList();
@@ -41,8 +41,8 @@
 	<input type='submit' value='AQ hinzufügen' class='submit'>
 	</form>
 	</p>
-</div>
-<div class='main'>
+</td>
+<td class='main'>
 	<h2>Übersicht der letzten 10 Quests</h2>
 	<?php
 		// Quests holen
@@ -119,4 +119,4 @@
 		}
 	?>
 	
-</div>
+</td>

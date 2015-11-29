@@ -1,6 +1,6 @@
-<div class='left'>
+<td class='left'>
 	Main
-</div>
-	<div class='main'>
+</td>
+	<td class='main'>
 		Main		
-	</div>
+	</td>

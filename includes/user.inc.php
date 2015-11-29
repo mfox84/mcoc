@@ -2,15 +2,15 @@
 	require_once 'worker/UserWorker.class.php';
 ?>
 
-<div class='left'>
+<td class='left'>
 	<ul>
 	<li><a href="?site=users&active=1">aktive User</a></li>
 	<li><a href="?site=users&active=0">inaktve User</a></li>
 	<li><a href="?site=users">alle User</a></li>
 	<li><a href='?site=userform'>User hinzufügen</a></li>	
 	</ul>
-</div>
-	<div class='main'>
+</td>
+	<td class='main'>
 		<?php
 		$active = null;
 		
@@ -53,4 +53,4 @@
 			
 		?>
 	
-	</div>
+	</td>

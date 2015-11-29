@@ -9,7 +9,8 @@
   * Ausgabe des Footers
   */
 ?>
-<div class="footer">Fox</div>
-</div>
+
+</tr>
+</table>
 </body>
 </html>

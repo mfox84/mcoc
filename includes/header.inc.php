@@ -10,9 +10,32 @@
 </head>
 
 <body>
+	<table cellpadding="0" cellspacing="0" class="wrapper">
+		<tr>
+			<td colspan="2" class="header">
+				<img src='images/logo.png' height='120px' align="left" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="headnav">
+				<ul>
+					<li><a href='index.php?site=users'>User</a></li>
+					<li><a href='index.php?site=events'>Events</a></li>
+					<li><a href='index.php?site=aq'>Alliance-Quests</a></li>
+				
+				</ul>
+			</td>
+		</tr>
+		<tr>
+
+	
+	
+	
+	
+	<!--
 	<div class="wrapper">
 	<div class='header'>
-		<img src='images/logo.png' height='120px' align="left" />
+		
 		
 	</div>
 	<div class='headnav'>
@@ -23,3 +46,4 @@
 			
 		</ul>
 	</div>
+	-->

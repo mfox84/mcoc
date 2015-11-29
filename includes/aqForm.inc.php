@@ -12,14 +12,14 @@
 	{
 ?>
 
-<div class='left'>
+<td class='left'>
 	<?php
 		$worker = new AQWorker();
 		$worker->showAQList();
 	?>
 		<br><a href="?site=aqform">AQ hinzufügen</a>
-</div>
-	<div class='main'>
+</td>
+	<td class='main'>
 		
 	
 <?php
@@ -95,7 +95,7 @@
 	<input type="submit" class="submit">
 </form>
 
-</div>
+</td>
 <?php
 }
 ?>
