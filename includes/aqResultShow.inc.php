@@ -135,7 +135,10 @@ else
 			}
 		}
 		// Anteil berechnen
-		$share = round($pointsTotal / $pointsTotalAQ * 100,2);
+		if($pointsTotalAQ >0 )
+			$share = round($pointsTotal / $pointsTotalAQ * 100,2);
+		else
+			$share = 0;
 		
 		$row["pointsTotal"] = $pointsTotal;
 		$row["share"] = sprintf("%01.2f",$share);
